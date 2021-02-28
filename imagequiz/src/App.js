@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
   HashRouter as Router,
@@ -6,14 +6,14 @@ import {
   Route
 } from 'react-router-dom';
 
-import NavBar from './components/NavBar';
+import NavigationBar from './components/NavigationBar';
 import Home from './components/Home';
 import Login from './components/Login';
 
 function App() {
   return (
     <Router>
-      <NavBar />
+      <NavigationBar />
       <Switch>
         <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
