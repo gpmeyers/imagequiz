@@ -1,5 +1,6 @@
-import flowers from "./../data";
+import flowers from "./../flowers";
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Home(){
     return (
@@ -9,11 +10,12 @@ function Home(){
             <Container>
                 <Row>
                     {flowers.map((flower) => {
+                        let link = "/" + flower.name;
                         return (
                             <Col class="align-top p-3" xs={12} md={3}>
-                                <Card>
-                                    <Card.Img variant="top" src={flower.picture} />
-                                    <Card.Title class="text-center">{flower.name}</Card.Title>
+                                <Card component={Link} to={link}>
+                                    <Link to={link}><Card.Img variant="top" src={flower.picture} /></Link>
+                                    <Link to={link}><Card.Title class="text-center">{flower.name}</Card.Title></Link>
                                 </Card>
                             </Col>
                         );
