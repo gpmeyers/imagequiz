@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import flowers from '../flowers';
-import quizzes from '../data';
+import api from '../communication/api';
 
 const Quiz = ({ name }) => {
     let quizNum = 0;
@@ -14,7 +14,15 @@ const Quiz = ({ name }) => {
         }
     }
 
-    let quiz = quizzes[quizNum];
+    const [quiz, setQuiz] = useState([]);
+
+    useEffect(() => {
+        if(quiz.length === 0){
+            api.getQuiz(quizNum)
+            .then(x => setQuiz(x))
+            .catch(e => console.log(e));
+        }
+    });
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
@@ -30,6 +38,7 @@ const Quiz = ({ name }) => {
         }
         else{
             setShowScore(true);
+            api.addScore(score);
         }
     }
 
