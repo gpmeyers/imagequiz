@@ -1,13 +1,14 @@
 let apiHost = "https://gpmeyers-imagequiz.herokuapp.com";
 
-let getQuizzes = () => {
+let getQuizzes = async () => {
     return fetch(apiHost + '/quizzes')
-    .then(response => response.json());
+    .then(res => res.json());
 }
 
-let getQuiz = (id) => {
+let getQuiz = async (id) => {
+    console.log(apiHost + '/quizzes/');
     return fetch(apiHost + '/quizzes/' + id)
-    .then(response => response.json());
+    .then(res => res.json());
 }
 
 let addScore = (score) => {

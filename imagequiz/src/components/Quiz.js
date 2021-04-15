@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import flowers from '../flowers';
@@ -17,12 +16,10 @@ const Quiz = ({ name }) => {
     const [quiz, setQuiz] = useState([]);
 
     useEffect(() => {
-        if(quiz.length === 0){
-            api.getQuiz(quizNum)
-            .then(x => setQuiz(x))
-            .catch(e => console.log(e));
-        }
-    });
+        api.getQuiz(quizNum)
+        .then(res => setQuiz(res))
+        .catch(e => console.log(e));
+    }, []);
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
@@ -38,7 +35,6 @@ const Quiz = ({ name }) => {
         }
         else{
             setShowScore(true);
-            api.addScore(score);
         }
     }
 
@@ -50,7 +46,7 @@ const Quiz = ({ name }) => {
 
     return (
         <div>
-            {showScore ? (
+            {quiz && (showScore ? (
                 <div className="text-center font-weight-bolder display-3 mt-3">
                     You scored {score} out of {quiz.length}<br />
                     <div className="d-flex mx-auto justify-content-center mt-3 w-75">
@@ -72,7 +68,7 @@ const Quiz = ({ name }) => {
                         ))}
                     </div>
                 </div>
-            )}
+            ))}
         </div>
     );
 }
